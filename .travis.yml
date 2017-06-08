@@ -34,7 +34,7 @@ after_success:
   - docker build -t apalahitunamanya2/customer .
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push apalahitunamanya2/blog;
+    docker push apalahitunamanya2/customer;
     fi
 notifications:
   slack:
