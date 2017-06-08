@@ -11,8 +11,6 @@ before_install:
   - source ~/.bashrc
   - go get -u gopkg.in/alecthomas/gometalinter.v1
   - go get github.com/mattn/goveralls
-  - go get code.google.com/p/go.tools/cmd/cover
-  - go get github.com/modocache/gover
 install:
   - docker run -p 27017:27017 -d --name mongo mongo
   - docker run -p 5672:5672 -d --name rabbitmq rabbitmq
@@ -29,16 +27,15 @@ script:
   - go env
   - pwd
   - go -cover test ./...
-  - gover
-#  - gometalinter ./...
+  #  - gometalinter ./...
   - cd $HOME/gopath/src/customer
-  - goveralls -coverprofile=overalls.coverprofile -service=travis-ci
-# after_success:
-  # - docker build -t apalahitunamanya2/blog .
-  # - if [ "$TRAVIS_BRANCH" == "master" ]; then
-  #   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  #   docker push apalahitunamanya2/blog;
-  #   fi
+  # - goveralls -coverprofile=overalls.coverprofile -service=travis-ci
+after_success:
+  - docker build -t apalahitunamanya2/customer .
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push apalahitunamanya2/blog;
+    fi
 notifications:
   slack:
     rooms:

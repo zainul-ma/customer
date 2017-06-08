@@ -1,7 +1,9 @@
 FROM golang:1.8.1
 
 ENV GOPATH /go
-ENV GOENV dev
+
+ENV GOENV local
+
 ENV PATH $GOPATH/bin:$PATH
 
 RUN mkdir -p /go/src/customer
@@ -10,13 +12,13 @@ ADD . /go/src/customer
 
 WORKDIR /go/src/customer
 
-RUN go get github.com/Masterminds/glide
+RUN wget https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm && chmod +x gpm && sudo mv gpm /usr/local/bin
 
-RUN glide install
+RUN gpm install
 
 RUN go get github.com/beego/bee
 
-RUN go build -o /go/src/customer/customer /go/src/customer/main.go
+# RUN go build -o /go/src/customer/customer /go/src/customer/main.go
 
 # RUN bee run customer
 
