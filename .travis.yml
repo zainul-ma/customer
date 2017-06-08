@@ -30,7 +30,7 @@ script:
   - go test ./...
 #  - gometalinter ./...
   - cd $HOME/gopath/src/customer
-  - overalls -project=$HOME/gopath/src/customer -covermode=count -debug
+  - overalls -project=$HOME/gopath/src -covermode=count -debug
   - goveralls -coverprofile=overalls.coverprofile -service=travis-ci
 # after_success:
   # - docker build -t apalahitunamanya2/blog .
