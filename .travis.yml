@@ -11,6 +11,7 @@ before_install:
   - source ~/.bashrc
   - go get -u gopkg.in/alecthomas/gometalinter.v1
   - go get github.com/mattn/goveralls
+  - go get github.com/go-playground/overalls
 install:
   - docker run -p 27017:27017 -d --name mongo mongo
   - docker run -p 5672:5672 -d --name rabbitmq rabbitmq
@@ -29,7 +30,8 @@ script:
   - go test ./...
 #  - gometalinter ./...
   - cd $HOME/gopath/src/customer
-  - goveralls -service=travis-ci
+  - overalls -project=$HOME/gopath/src/customer -covermode=count -debug
+  - goveralls -coverprofile=overalls.coverprofile -service=travis-ci
 # after_success:
   # - docker build -t apalahitunamanya2/blog .
   # - if [ "$TRAVIS_BRANCH" == "master" ]; then
