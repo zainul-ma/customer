@@ -12,13 +12,13 @@ ADD . /go/src/customer
 
 WORKDIR /go/src/customer
 
-RUN sudo apt-get install wget
+RUN apt-get install wget
 
 RUN wget https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm
 
 RUN chmod +x gpm
 
-RUN sudo mv gpm /usr/local/bin
+RUN mv gpm /usr/local/bin
 
 RUN gpm install
 
