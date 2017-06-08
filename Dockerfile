@@ -12,9 +12,13 @@ ADD . /go/src/customer
 
 WORKDIR /go/src/customer
 
-# RUN wget https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm && chmod +x gpm && sudo mv gpm /usr/local/bin
+RUN wget https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm
 
-# RUN gpm install
+RUN chmod +x gpm
+
+RUN sudo mv gpm /usr/local/bin
+
+RUN gpm install
 
 RUN go get github.com/beego/bee
 
