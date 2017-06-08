@@ -29,7 +29,7 @@ script:
   - go test ./...
   #  - gometalinter ./...
   - cd $HOME/gopath/src/customer
-  - goveralls -service=travis-ci
+  # - goveralls -service=travis-ci
 after_success:
   - docker build -t apalahitunamanya2/customer .
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
