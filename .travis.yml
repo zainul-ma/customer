@@ -40,7 +40,7 @@ after_success:
   - cd .travis/
   - ls -lah
   - chmod 600 $KEY_SSH
-  - travis_wait ssh -i $KEY_SSH -oStrictHostKeyChecking=no $USER_SSH@$HOST_DEV  'bash -s' < deploy-update-docker.sh
+  - ssh -i $KEY_SSH -oStrictHostKeyChecking=no $USER_SSH@$HOST_DEV  'bash -s' < deploy-update-docker.sh
   - exit
 notifications:
   slack:
