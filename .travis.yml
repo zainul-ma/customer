@@ -27,10 +27,10 @@ script:
   - ls -lah
   - go env
   - pwd
-  - go test -v -coverprofile=coverage.out ./...
+  - go test ./...
   #  - gometalinter ./...
   - cd $HOME/gopath/src/customer
-  - goveralls -coverprofile=coverage.out -service=travis-ci
+  - goveralls -service=travis-ci
 after_success:
   - docker build -t apalahitunamanya2/customer:$(git log --format="%H" -n 1) .
   - docker build -t apalahitunamanya2/customer:latest .
