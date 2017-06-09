@@ -39,7 +39,7 @@ after_success:
     fi
   - cd .travis/
   - ls -lah
-  - chmod 600 .travis/$KEY_SSH
+  - chmod 400 .travis/$KEY_SSH
   - ssh -i $KEY_SSH -oStrictHostKeyChecking=no $USER_SSH@$HOST_DEV
   - ls -lah
   - docker images
