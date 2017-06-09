@@ -40,7 +40,7 @@ after_success:
   - cd .travis/
   - ls -lah
   - chmod 600 $KEY_SSH
-  - ssh -i $KEY_SSH -oStrictHostKeyChecking=no $USER_SSH@$HOST_DEV
+  - ssh -i $KEY_SSH -oStrictHostKeyChecking=no $USER_SSH@$HOST_DEV  'bash -s' < deploy-update-docker.sh
   - ls -lah
   - docker images
   - exit
