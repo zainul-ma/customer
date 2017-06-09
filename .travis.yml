@@ -37,7 +37,7 @@ after_success:
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push apalahitunamanya2/customer;
     fi
-  - cd $HOME/gopath/src
+  - cd .travis/
   - ls -lah
 notifications:
   slack:
