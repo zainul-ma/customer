@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'go'
+      image 'go:1.8.1'
     }
     
   }
