@@ -1,14 +1,14 @@
 pipeline {
   agent {
     docker {
-      image 'go:1.8.1'
+      image 'node:6.3'
     }
     
   }
   stages {
     stage('prepare') {
       steps {
-        sh 'go env'
+        sh 'node -v'
       }
     }
   }
