@@ -1,9 +1,8 @@
 pipeline {
-  agent {
-    docker {
-      image 'go'
+  stages {
+    stage('Prepare Environment') {
+      docker.image('go:1.8.1').inside {
     }
-    
   }
   stages {
     stage('Build Environment') {
