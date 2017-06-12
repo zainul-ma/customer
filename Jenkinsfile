@@ -1,14 +1,18 @@
 pipeline {
-  agent {
-    docker {
-      image 'go'
-    }
-    
-  }
+  agent any
   stages {
     stage('prepare') {
       steps {
-        sh 'go env'
+        parallel(
+          "prepare": {
+            sh 'go env'
+            
+          },
+          "show who i am i": {
+            sh 'echo $USER'
+            
+          }
+        )
       }
     }
   }
