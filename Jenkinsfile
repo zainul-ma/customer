@@ -12,6 +12,7 @@ pipeline {
         sh '$USER'
         sh 'go version'
         sh 'ls -lah /go/'
+        sh 'go env'
       }
     }
     stage('Install package') {
