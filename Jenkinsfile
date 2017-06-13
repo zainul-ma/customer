@@ -9,10 +9,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        sh 'git config --global user.name'
+        sh 'git config --global user.email'
         sh 'mkdir -p $GOPATH/src'
-        sh 'git clone --depth=50 --branch=master https://github.com/zainul-ma/customer.git customer'
+        sh '$USER'
         sh 'go version'
-        sh 'go env'
       }
     }
     stage('Install package') {
