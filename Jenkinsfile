@@ -1,10 +1,9 @@
 pipeline {
-
   agent {
     docker {
       image 'golang:1.8.1'
     }
-
+    
   }
   stages {
     stage('Build') {
@@ -12,6 +11,7 @@ pipeline {
         sh 'mkdir -p $GOPATH/src'
         sh '$USER'
         sh 'go version'
+        sh 'ls -lah /go/'
       }
     }
     stage('Install package') {
