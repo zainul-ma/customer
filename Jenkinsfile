@@ -19,9 +19,9 @@ pipeline {
     stage('Install package') {
       steps {
         sh 'wget -qO- https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm | bash'
-        sh 'gpm'
         sh 'go get github.com/mattn/goveralls'
         sh 'ifconfig'
+        sh 'docker ps -a'
       }
     }
   }
