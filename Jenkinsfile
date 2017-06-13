@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Install package') {
       steps {
-        sh 'wget https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm && chmod +x gpm && mv gpm /usr/local/bin'
+        sh 'wget https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm && chmod +x gpm && sudo mv gpm /usr/local/bin'
         sh 'gpm install'
         sh 'go get github.com/mattn/goveralls'
         sh 'ifconfig'
