@@ -14,6 +14,7 @@ pipeline {
         sh 'go version'
         sh 'ls -lah /go/'
         sh 'go env'
+        sh 'echo $GOENV'
       }
     }
     stage('Install package') {
@@ -33,6 +34,6 @@ pipeline {
     }
   }
   environment {
-    GOENV = 'local'
+    GOENV = 'testCi'
   }
 }
