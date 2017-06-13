@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh 'env.GOPATH=$PWD'
         sh 'mkdir -p $GOPATH/src/customer'
-        dir('$GOPATH/src/marketability-service') {
+        dir('$GOPATH/src/customer') {
             sh 'go version'
             sh 'echo $GOPATH'
             checkout scm
