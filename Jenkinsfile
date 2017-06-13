@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'env.GOPATH=/var/lib/jenkins/workspace'
+        sh 'export GOPATH=/var/lib/jenkins/workspace'
         sh 'mkdir -p $GOPATH/src/customer'
         dir('$GOPATH/src/customer') {
             sh 'go version'
