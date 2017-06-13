@@ -26,5 +26,10 @@ pipeline {
         sh 'ls -lah /go/src/customer'
       }
     }
+    stage('Test') {
+      steps {
+        sh 'cd /go/src/customer && go test ./...'
+      }
+    }
   }
 }
