@@ -34,18 +34,20 @@ func TestDBCredential(t *testing.T) {
 }
 
 func TestConnection(t *testing.T) {
-	// dbURL := models.DbCred()
+	dbURL := models.DbCred()
 
-	// _, err := mgo.Dial(dbURL)
+	directMgo, err := mgo.Dial(dbURL)
 
 	session := models.ConnectMongo()
 
 	defer session.Close()
 
+	defer directMgo.Close()
+
 	Convey("Subject: Monggo Connection\n", t, func() {
-		// Convey("Monggo conecction error should be nil", func() {
-		// 	So(err, ShouldEqual, nil)
-		// })
+		Convey("Monggo conecction error should be nil", func() {
+			So(err, ShouldEqual, nil)
+		})
 		Convey("Monggo session mongotonic mode", func() {
 			So(session.Mode(), ShouldEqual, mgo.Monotonic)
 		})
