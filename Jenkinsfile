@@ -27,6 +27,21 @@ pipeline {
         sh 'ls -lah /go/src/customer'
       }
     }
+    stage('Integration Test') {
+      steps {
+        sh 'cd /go/src/customer/tests/integration && go test ./...'
+      }
+    }
+    stage('Unit Test') {
+      steps {
+        sh 'cd /go/src/customer/tests/unit && go test ./...'
+      }
+    }
+    stage('Component Test') {
+      steps {
+        sh 'cd /go/src/customer/tests/components && go test ./...'
+      }
+    }
     stage('Build Image') {
       steps {
         sh 'docker'
