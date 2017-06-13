@@ -4,7 +4,7 @@ pipeline {
       image 'golang:1.8.1'
       args '-u root'
     }
-    
+
   }
   stages {
     stage('Build Go & Env') {
@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Unit Test') {
       steps {
-        sh 'cd /go/src/customer/tests/unit && go test ./...'
+        sh 'cd /go/src/customer/tests/unit '
       }
     }
     stage('Component Test') {
