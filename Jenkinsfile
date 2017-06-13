@@ -1,11 +1,26 @@
-node {
-  def root = tool name: 'Go 1.8.1', type: 'go'
-  ws("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/src/customer") {
-    withEnv(["GOROOT=${root}", "GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/", "PATH+GO=${root}/bin"]) {
-        env.PATH="${GOPATH}/bin:$PATH"
+pipeline {
 
-        stage 'Init'
+  agent {
+    docker {
+      image 'golang:1.7'
+    }
+
+  }
+  stages {
+    stage('Initial') {
+      steps {
         sh 'go env'
+        sh 'ls -lah'
+        sh 'pwd'
+      }
+    }
+    stage('Install package') {
+      steps {
+        sh 'go get github.com/mattn/goveralls'
+        sh 'wget https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm && chmod +x gpm && sudo mv gpm /usr/local/bin'
+        sh 'gpm install'
+        sh 'ifconfig'
+      }
     }
   }
 }
