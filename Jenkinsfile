@@ -9,14 +9,10 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'export GOPATH=/var/lib/jenkins/workspace'
-        sh 'mkdir -p $GOPATH/src/customer'
-        dir('$GOPATH/src/customer') {
-            sh 'go version'
-            sh 'echo $GOPATH'
-            checkout scm
-            sh 'ls -lah'
-        }
+        sh 'mkdir -p $GOPATH/src'
+        sh 'git clone --depth=50 --branch=master https://github.com/zainul-ma/customer.git customer'
+        sh 'go version'
+        sh 'go env'
       }
     }
     stage('Install package') {
