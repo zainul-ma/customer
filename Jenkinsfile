@@ -18,8 +18,11 @@ pipeline {
     }
     stage('Install package') {
       steps {
-        sh 'git clone --depth=50 --branch=master https://github.com/zainul-ma/customer.git /go/src'
-        sh 'docker ps -a'
+        sh 'git clone --depth=50 --branch=master https://github.com/zainul-ma/customer.git /go/src/customer'
+        sh 'wget -qO- https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm | bash'
+        sh 'go get github.com/mattn/goveralls'
+        sh 'cd /go/src/customer'
+        sh 'go test ./...'
       }
     }
   }
