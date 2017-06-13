@@ -32,4 +32,7 @@ pipeline {
       }
     }
   }
+  environment {
+    GOENV = 'local'
+  }
 }
