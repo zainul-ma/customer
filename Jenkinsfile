@@ -12,7 +12,6 @@ pipeline {
         sh 'mkdir -p $GOPATH/src'
         sh '$USER'
         sh 'go version'
-        sh 'git clone --depth=50 --branch=master https://github.com/zainul-ma/customer.git customer'
       }
     }
     stage('Install package') {
