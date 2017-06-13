@@ -4,7 +4,7 @@ pipeline {
       image 'golang:1.8.1'
       args '-u root'
     }
-
+    
   }
   stages {
     stage('Build') {
@@ -22,7 +22,8 @@ pipeline {
         sh 'wget -qO- https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm | bash'
         sh 'go get github.com/mattn/goveralls'
         sh 'cd /go/src/customer'
-        sh 'go test ./...'
+        sh 'ls -lah && pwd'
+        sh 'ls -lah /go/src/customer'
       }
     }
   }
