@@ -12,12 +12,13 @@ pipeline {
         sh 'mkdir -p $GOPATH/src'
         sh '$USER'
         sh 'go version'
+        sh 'chmod 777 -R /go'
       }
     }
     stage('Install package') {
       steps {
         sh 'wget -qO- https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm | bash'
-        sh 'gpm install'
+        sh 'gpm'
         sh 'go get github.com/mattn/goveralls'
         sh 'ifconfig'
       }
