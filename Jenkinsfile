@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Unit Test') {
       steps {
-        sh 'cd /go/src/customer/tests/unit '
+        sh 'cd /go/src/customer/tests/unit && go test ./...'
       }
     }
     stage('Component Test') {
