@@ -2,16 +2,21 @@ pipeline {
 
   agent {
     docker {
-      image 'golang:1.7'
+      image 'golang:1.8.1'
     }
 
   }
   stages {
-    stage('Initial') {
+    stage('Build') {
       steps {
-        sh 'go env'
-        sh 'ls -lah'
-        sh 'pwd'
+        sh 'env.GOPATH=$PWD'
+        sh 'mkdir -p $GOPATH/src/customer'
+        dir('$GOPATH/src/marketability-service') {
+            sh 'go version'
+            sh 'echo $GOPATH'
+            checkout scm
+            sh 'ls -lah'
+        }
       }
     }
     stage('Install package') {
