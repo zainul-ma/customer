@@ -12,7 +12,7 @@ pipeline {
         sh 'mkdir -p $GOPATH/src'
         sh '$USER'
         sh 'go version'
-        sh 'chmod 777 -R /go'
+        sh 'sudo chmod 777 -R /go'
       }
     }
     stage('Install package') {
