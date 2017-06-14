@@ -1,15 +1,29 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'docker'
+      args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
+    }
+
+  }
   stages {
-    stage('Build Go & Env') {
+    stage('Verify golang env') {
       steps {
         tool(name: 'Golang', type: 'go')
         sh 'go env'
+        sh 'mkdir -p $GOPATH/src'
+        sh '$USER'
+        sh 'go version'
+        sh 'ls -lah /go/'
+        sh 'go env'
+        sh 'echo $GOENV'
+        sh 'mkdir -p /go/global'
       }
     }
     stage('Install App & Dep') {
       steps {
-        sh 'git clone --depth=50 --branch=master https://github.com/zainul-ma/customer.git /go/src/customer'
+        tool(name: 'Golang', type: 'go')
+        sh 'mkdir -p /go/src/customer &&  cp -r ./* /go/src/customer'
         sh 'wget -qO- https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm | bash'
         sh 'go get github.com/mattn/goveralls'
         sh 'cd /go/src/customer'
@@ -19,26 +33,31 @@ pipeline {
     }
     stage('Integration Test') {
       steps {
+        tool(name: 'Golang', type: 'go')
         sh 'cd /go/src/customer/tests/integration && go test ./...'
       }
     }
     stage('Unit Test') {
       steps {
+        tool(name: 'Golang', type: 'go')
         sh 'cd /go/src/customer/tests/unit && go test ./...'
-      }
-    }
-    stage('Component Test') {
-      steps {
-        sh 'cd /go/src/customer/tests/components && go test ./...'
       }
     }
     stage('Build Image') {
       steps {
-        sh 'docker'
+        sh 'docker build -t apalahitunamanya2/customer:latest .'
+        sh 'docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";'
+        sh 'docker push apalahitunamanya2/customer:latest;'
+        sh 'ssh -i $KEY_SSH -oStrictHostKeyChecking=no $USER_SSH@$HOST_DEV  "bash -s" < deploy-update-docker.sh'
       }
     }
   }
   environment {
-    GOENV = 'testCi'
+    GOENV = 'local'
+    DOCKER_USERNAME = 'apalahitunamanya2'
+    DOCKER_PASSWORD = 'donokasinoindro123'
+    KEY_SSH = '/var/lib/jenkins/workspace/tn-indo-key.pem'
+    USER_SSH = 'ubuntu'
+    HOST_DEV = '203.154.91.182'
   }
 }
