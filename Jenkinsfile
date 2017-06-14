@@ -5,7 +5,7 @@ pipeline {
       steps {
         tool(name: 'Golang', type: 'go')
         sh 'go env'
-        sh 'mkdir -p $GOPATH/src'
+        sh 'sudo mkdir -p $GOPATH/src'
         sh '$USER'
         sh 'go version'
         sh 'ls -lah /go/'
@@ -17,7 +17,7 @@ pipeline {
     stage('Install App & Dep') {
       steps {
         tool(name: 'Golang', type: 'go')
-        sh 'mkdir -p /go/src/customer &&  cp -r ./* /go/src/customer'
+        sh 'sudo mkdir -p /go/src/customer &&  cp -r ./* /go/src/customer'
         sh 'wget -qO- https://raw.githubusercontent.com/pote/gpm/v1.4.0/bin/gpm | bash'
         sh 'go get github.com/mattn/goveralls'
         sh 'cd /go/src/customer'
