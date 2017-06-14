@@ -6,7 +6,6 @@ pipeline {
         tool(name: 'Golang', type: 'go')
         sh 'go env'
         sh 'sudo mkdir -p $GOPATH/src'
-        sh '$USER'
         sh 'go version'
         sh 'ls -lah /go/'
         sh 'go env'
