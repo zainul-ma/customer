@@ -38,6 +38,7 @@ pipeline {
     }
     stage('Build Image') {
       steps {
+        tool(name: 'local-docker-jenkins', type: 'docker')
         sh 'docker build -t apalahitunamanya2/customer:latest .'
         sh 'docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";'
         sh 'docker push apalahitunamanya2/customer:latest;'
