@@ -10,7 +10,7 @@ pipeline {
         sh 'ls -lah $GOPATH/'
         sh 'go env'
         sh 'echo $GOENV'
-        sh 'mkdir -p $GOPATH/global'
+        sh 'sudo mkdir -p $GOPATH/global'
       }
     }
     stage('Install App & Dep') {
